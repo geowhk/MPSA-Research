@@ -1,0 +1,140 @@
+# Kruber et al., 2019에서 제안된 Path Proximity 계산해보기
+
+library(tidyverse)
+library(randomForest)
+library(sf)
+library(pbapply)
+library(future)
+library(future.apply)
+library(progressr)
+library(Guerry)
+library(sp)
+library(tmap)
+
+
+# Data --------------------------------------------------------------------
+
+gfrance85 <- st_as_sf(gfrance85)
+View(gfrance85)
+qtm(gfrance85)
+names(gfrance85)
+
+data <- gfrance85 |> 
+  st_drop_geometry() |> 
+  dplyr::select(Region, Crime_pers, Crime_prop, Literacy, Donations, Infants)
+
+
+compute_path_proximity <- function(data, n_tree = 500, workers = 2) {
+  set.seed(42)
+  
+  # ---- 0. Set parallel computing environment ----
+  plan(multisession, workers = workers)
+  handlers(global = TRUE)
+  
+  n <- nrow(data)
+  
+  # ---- 1. Random Forest modeling (Addcl1 method) ----
+  synthetic <- as.data.frame(lapply(data, function(col) sample(col, replace = TRUE)))
+  data_all <- rbind(data, synthetic)
+  y_all <- factor(c(rep("real", nrow(data)), rep("synthetic", nrow(synthetic))))
+  
+  rf <- randomForest(x = data_all,
+                     y = y_all,
+                     ntree = n_tree)
+  
+  # ---- 2. Function to compute paths for each tree ----
+  get_paths <- function(tree_num) {
+    tree <- getTree(rf, k = tree_num, labelVar = FALSE)
+    paths <- vector("list", 2 * n)
+    
+    for (i in 1:(2 * n)) {
+      path <- c()
+      node <- 1
+      repeat {
+        path <- c(path, node)
+        split_var <- tree[node, "split var"]
+        if (split_var == 0) break
+        
+        split_val <- tree[node, "split point"]
+        split_var_name <- colnames(data_all)[split_var]
+        value <- data_all[i, split_var_name]
+        
+        if (is.factor(data_all[[split_var_name]])) {
+          # 범주형 변수 처리: split_val은 레벨 인덱스
+          levels_list <- levels(data_all[[split_var_name]])
+          left_levels <- levels_list[1:split_val]
+          if (as.character(value) %in% left_levels) {
+            node <- tree[node, "left daughter"]
+          } else {
+            node <- tree[node, "right daughter"]
+          }
+        } else {
+          # 수치형 변수 처리
+          if (value <= split_val) {
+            node <- tree[node, "left daughter"]
+          } else {
+            node <- tree[node, "right daughter"]
+          }
+        }
+      }
+      paths[[i]] <- path
+    }
+    return(paths)
+  }
+  
+  # ---- 3. Compute all paths in parallel ----
+  message("Computing paths for all trees in parallel...")
+  all_paths <- future_lapply(1:n_tree, get_paths, future.packages = "randomForest")
+  
+  # ---- 4. Compute proximity matrix in parallel ----
+  message("Calculating path proximity matrix in parallel...")
+  proximity <- matrix(0, nrow = n, ncol = n)
+  p <- progressor(steps = n_tree)
+  
+  tree_jaccard <- function(b) {
+    paths <- all_paths[[b]]
+    mtx <- matrix(0, nrow = n, ncol = n)
+    for (i in 1:n) {
+      Ti <- paths[[i]]
+      for (j in i:n) {
+        Tj <- paths[[j]]
+        intersect_len <- length(intersect(Ti, Tj))
+        union_len <- length(union(Ti, Tj))
+        jaccard <- intersect_len / union_len
+        mtx[i, j] <- jaccard
+        if (i != j) mtx[j, i] <- jaccard
+      }
+    }
+    p()
+    return(mtx)
+  }
+  
+  with_progress({
+    mtx_list <- future_lapply(1:n_tree, tree_jaccard)
+  })
+  
+  # ---- 5. Aggregate and normalize the results ----
+  for (m in mtx_list) {
+    proximity <- proximity + m
+  }
+  proximity <- proximity / n_tree
+  
+  rownames(proximity) <- rownames(data)
+  colnames(proximity) <- rownames(data)
+  
+  return(proximity)
+}
+
+
+P <- compute_path_proximity(data)
+
+write_rds(P, "PathProximity.rds")
+
+off_diag_values <- P[lower.tri(P)]
+summary(off_diag_values)
+hist(off_diag_values)
+zero_ratio <- mean(off_diag_values == 0)
+cat("Proportion of exact zeros in off-diagonal:", round(zero_ratio * 100, 2), "%\n")
+
+diag_values <- diag(P)
+summary(diag_values)

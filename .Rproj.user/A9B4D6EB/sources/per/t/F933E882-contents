@@ -1,0 +1,180 @@
+---
+title: "Developing Multivariate Proximity-based Spatial Autocorrelation Statistics Using Random Forests"
+author: Woohyung Kim
+format: 
+  pdf:
+    documentclass: article
+    toc: false
+    number-sections: true
+    number-depth: 2
+    linestretch: 2
+    keep-tex: true
+    fig-cap-location: bottom
+    tbl-cap-location: top
+    link-citations: true
+    geometry: left=2.5cm, right=2.5cm, top=3cm, bottom=3cm
+bibliography: reference.bib
+csl: apa.csl
+---
+
+# Introduction
+
+# Literature Review
+
+Early spatial statistics introduced measures to quantify global spatial autocorrelation – the degree to which a variable’s values are similar (or dissimilar) at nearby locations. The two classic indices are Moran’s *I* and Geary’s $c$. Moran’s $I$, proposed by [@moran1950], is essentially a spatial analog of a correlation coefficient, assessing whether high or low values of a variable cluster in space. It ranges roughly from –1 (perfect dispersion) to +1 (strong clustering), with an expected value near 0 under spatial randomness. Geary’s c, introduced by [@geary1954], takes a different form: it is based on squared differences between neighboring values. Geary’s $c$ ranges from 0 to about 2, where values \< 1 indicate positive spatial autocorrelation (neighbors are similar) and \> 1 indicate negative autocorrelation (neighbors are dissimilar). Conceptually, while Moran’s $I$ emphasizes covariance (a *linear* association) between a location and its neighbors, Geary’s $c$ emphasizes absolute differences. This means Geary’s $c$ is more sensitive to local value differences and is “not limited to linear associations. In practice, both indices often reveal similar broad patterns, but Geary’s $c$ may pick up nuanced local variations that Moran’s $I$ could miss due to its linearity assumption [@anselin2019].
+
+A major limitation of global measures is the assumption of spatial stationarity – i.e., one summary statistic characterizes the entire study area. In reality, spatial relationships are often heterogeneous. This motivated the development of local spatial autocorrelation statistics. Anselin’s introduction of *Local Indicators of Spatial Association (LISA)* marked a pivotal shift to localized analysis [@anselin1995]. Under the LISA framework, global Moran and Geary statistics were decomposed into their *local* counterparts: Local Moran’s $I$ and Local Geary’*s* $c$, respectively. These local statistics evaluate each location’s contribution to the global autocorrelation, effectively identifying *where* significant clustering or outlier patterns occur (as opposed to just measuring their overall intensity). For example, a high Local Moran’s $I$ for an area means it is part of a cluster of similar high (HH) or low (LL) values, whereas a low (negative) Local Moran indicates a spatial outlier (e.g. a high value surrounded by lows, HL). In contrast, Local Geary’s $c$ considers squared differences, so a significantly low Local Geary (c \< 1) flags a location whose value is very similar to its neighbors – but it does not by itself indicate whether that similarity is due to jointly high or jointly low values. In other words, Local Geary can detect local pockets of *association* even if the form is non-linear (any small difference), though it cannot distinguish a high-value cluster from a low-value cluster without additional. This underscores a trade-off: Local Moran (a cross-product measure) aligns with linear assumptions and allows categorization of cluster type (HH, LL, HL, LH), whereas Local Gear*y* is more general in form (capturing nonlinear association) but less interpretable in terms of cluster. Both local Moran and Geary, along with other local measures like Getis-Ord $G_i$ [@getis1992], have proven useful for exploratory spatial data analysis by highlighting *heterogeneity* – for instance, mapping local Moran’s $I$ can reveal distinct “hotspots” of high values and “coldspots” of low values that global Moran’s $I$ might obscure [@anselin1995]. One must note, however, that multiple comparisons become an issue – many local tests are performed – so significance must be interpreted with caution (e.g., using corrections or false discovery rate control, as discussed by [@anselin2019]).
+
+Building on the foundation of univariate spatial autocorrelation measures [@moran1950; @geary1954], @wartenberg1985 pioneered multivariate spatial correlation by integrating principal component analysis with spatial autocorrelation: he constructed a spatial covariance matrix whose diagonal entries are univariate Moran’s $I$ and off-diagonals are *bivariate* Moran’s $I$, then performed eigen-decomposition to extract components that maximize spatial autocorrelation rather than variance alone. @lee2001 introduced a bivariate spatial association measure (Lee’s $L$) combining Pearson’s $r$ with Moran’s $I$ to assess co-clustering of two variables beyond their individual spatial patterns. Lee(2012) proposed a local multivariate spatial autocorrelation statistic based on Mahalanobis distance, enabling direct assessment of regional associations among multiple attributes with chi-square–based significance testing. Building further on local multivariate extensions, @anselin2019 developed a multivariate Local Geary’s $c$ by computing attribute-space distances across multiple variables for each neighborhood and employing permutation tests to explore local multivariate associations. More recently, @lin2023 compared Moran-based and Geary-based multivariate spatial pattern analysis, highlighting that different indices capture distinct aspects of complex spatial structures and providing guidance on method selection based on data characteristics.
+
+# Multivariate Proximity-based Spatial Autocorrelation Statistics (MPSA)
+
+This section introduces the Multivariate Proximity-based Spatial Autocorrelation Statistic (MPSA), a novel measure designed to quantify the degree of spatial autocorrelation in multivariate data. MPSA integrates a proximity matrix that captures the attribute similarity between observational units with a spatial weights matrix that represents spatial adjacency, enabling a quantitative assessment of the extent to which similar attribute patterns are spatially clustered.
+
+## Unsupervised Random Forest and the Construction of Proximity Matrix
+
+Since the measurement of spatial autocorrelation does not rely on a label, the proximity matrix is computed using an unsupervised random forest (URF) [@breiman2001]. To implement the URF, a synthetic dataset $\mathbf{X_{\text{fake}}}$ is first generated, matching the size and dimensionality of the original data matrix $\mathbf{X}$. The original and synthetic data are then merged to form $\mathbf{X_{\text{total}}}$, which serves as input for a binary classification model of random forests. @breiman2003 proposed two methods to generate such synthetic data: *Addcl1* and *Addcl2*. In the *Addcl1* approach, synthetic samples are drawn independently from the marginal distributions of each variable in the observed data, thereby preserving individual variable distributions while removing inter-variable dependence. In contrast, *Addcl2* samples are drawn uniformly from a hyper-rectangular space defined by the range of each variable in the original data, which alters both the distributional shape and the underlying correlation structure. According to @shi2006, the *Addcl1* method tends to outperform *Addcl2* in practical applications. Consequently, we adopt *Addcl1* for the main analysis.
+
+To construct the proximity matrix, the original and synthetic datasets are concatenated to form a single input matrix $\mathbf{X_{\text{total}}}=\begin{bmatrix} \mathbf{X} \\ \mathbf{X_{\text{fake}}} \end{bmatrix}\in \mathbb{R}^{2n\times p}$ and binary labels are assigned to generate the corresponding response vector $\mathbf{y}_{\text{total}}=\begin{bmatrix} \mathbf{0}_n \\ \mathbf{1}_n\end{bmatrix}$ with 0 indicating real data and 1 indicating synthetic data. A random forests classifier is then trained on this dataset. After training, the proximity between two observations is computed as the proportion of trees in which both observations fall into the same terminal node. Specifically, we define a complete size $\mathbf{P}_{\text{full}}$ proximity matrix $2n \times 2n$, from which we extract the upper left $n \times n$ submatrix $\mathbf{P}:= \mathbf{P}_{\text{full}}[1:n, 1:n]$, representing proximities between the original observations only. Formally, the proximity between observations $i$ and $j$ is given by @eq-proximity:
+
+$$
+\mathbf{P}_{ij} = \frac{1}{T} \sum_{t=1}^{T} \mathbf{1}\left( L_t(i) = L_t(j) \right)
+$$ {#eq-proximity}
+
+where $T$ is the total number of decision trees, $L_t(i)$ denotes the terminal node assigned to observation $i$ in tree $t$, and $\mathbf{1}(\cdot)$ is the indicator function that returns 1 if the condition is true, and 0 otherwise. The resulting proximity matrix captures complex nonlinear relationships and interaction effects among variables, and remains applicable in settings with mixed data types, including continuous and categorical attributes [@breiman2001].
+
+## Defining MPSA
+
+The spatial weights matrix used to define MPSA is constructed as a binary spatial contiguity matrix $\mathbf{W}$, where $\mathbf{W}_{ij} = 1$ if spatial units $i$ and $j$ share a common boundary, and $\mathbf{W}_{ij} = 0$ otherwise. The global MPSA statistic is defined as a normalized measure of spatial autocorrelation in proximity values, quantifying the extent to which multivariate attribute similarity is spatially clustered across the entire study area. It is computed as: \begin{equation}
+\label{eq:globalMPSA}
+\text{MPSA} = \frac{n}{\sum_i\sum_j W_{ij}} \cdot \frac{\sum_i\sum_j W_{ij}(P_{ij} - \bar{P})}{\sum_i\sum_j (P_{ij} - \bar{P})^2}
+\end{equation} where $n$ denotes the number of spatial units, $\bar{P}$ is the global mean of all proximity values, and the denominator corresponds to the total variance of proximity values across all spatial pairs. This formulation ensures that the statistic is invariant to the magnitude of the spatial weights and enables direct interpretation of MPSA as a standardized measure of global spatial clustering in multivariate similarity. The local version of the statistic, denoted $\text{MPSA}_i$, captures the extent to which a given unit $i$ exhibits elevated similarity with its spatial neighbors relative to the global mean. It is defined as: \begin{equation}
+\label{eq:localMPSA}
+\text{MPSA}_i = \frac{n^2}{\sum_i\sum_j W_{ij}} \cdot \frac{\sum_j W_{ij}(P_{ij} - \bar{P})}{\sum_i\sum_j (P_{ij} - \bar{P})^2}
+\end{equation} A high value of $\text{MPSA}_i$ indicates that unit $i$ shares stronger-than-expected multivariate similarity with its adjacent spatial units, as measured by the proximity values derived from the random forest. Conversely, negative or low values suggest local dissimilarity or spatial outliers. By comparing local statistics across space, spatial patterns of multivariate similarity can be effectively identified and interpreted.
+
+## Statistical Inference of MPSA
+
+This section presents the statistical testing procedure for assessing the significance of the proposed MPSA statistic. Since MPSA is computed based on the non-parametric random forest algorithm and does not follow a known probability distribution, conventional parametric inference methods assuming normality cannot be directly applied. Therefore, this study employs a permutation-based approach to empirically construct the null distribution of MPSA under the assumption of spatial randomness and to compute the p-value based on the relative position of the observed statistic. This non-parametric strategy is particularly advantageous in accommodating the nonlinear nature of proximity values and their complex interactions with spatial patterns. The null hypothesis of the permutation test is defined as: "The similarity in multivariate attributes between spatially adjacent units arises purely by chance." That is, the observed spatial arrangement of attribute values is assumed to be unrelated to their intrinsic similarity. To simulate the null distribution under this hypothesis, we randomly permute the entries of the proximity matrix $\mathbf{P}$, which encodes the attribute similarities. Specifically, to generate the null distribution of the global MPSA, we randomly shuffle only the upper-triangular elements of the proximity matrix $\mathbf{P}$, symmetrize the matrix by reflecting it across the diagonal, and set the diagonal elements to 1. This permutation strategy preserves the overall structure of $\mathbf{P}$ while ensuring randomness in its entries, thus mitigating excessive variation in permutation outcomes. For each of the $B=999$ permutations, the same centering and normalization procedures are applied to calculate the permuted MPSA values $\text{MPSA}^{(b)}$. The significance of the observed MPSA$_\text{obs}$ is evaluated using a two-sided test. The p-value is defined as twice the smaller of the proportions of permuted values greater than or less than the observed value: \begin{equation}
+p = 2 \cdot \min\left(\mathbb{P}(\text{MPSA}^{(b)} \geq \text{MPSA}_\text{obs}), \; \mathbb{P}(\text{MPSA}^{(b)} \leq \text{MPSA}_\text{obs})\right)
+\end{equation} Next, we perform a similar permutation test for the local statistics $\text{MPSA}_i$ to detect multivariate attribute-based hotspots and coldspots. The permutation procedure is the same as for the global statistic, and the local MPSA values are calculated for each permutation. To assess the significance of each unit, both the observed statistic and its standardized effect size are considered. The effect size is defined as: \begin{equation}
+\text{EffectSize}_i = \frac{\text{MPSA}_i - \mathbb{E}(\text{MPSA}_i^{(b)})}{\text{SD}(\text{MPSA}_i^{(b)})}
+\end{equation} Although p-values are computed in the same way as for the global test, applying separate tests across multiple spatial units can lead to inflated Type I error due to multiple comparisons. To address this issue, we apply the False Discovery Rate (FDR) correction proposed by @benjamini1995. The adjusted p-values are computed, and units with adjusted p-values above the significance level $\alpha = 0.05$ are classified as non-significant regardless of their effect size. This correction ensures a more conservative identification of significant spatial clusters and controls for false positives in a multiple-testing context.
+
+# Simulation-based Comparative Analysis of MPSA
+
+
+# Robustness Evaluation of MPSA using Franklin County Data
+
+The proposed MPSA is constructed using random forests, which introduces stochastic variability due to its inherent bootstrap sampling and random feature selection. Moreover, real-world data often contain measurement noise. This section empirically evaluates the robustness of MPSA under both algorithmic randomness and data noise.
+
+## Study Area and Data Description
+
+The dataset used for the robustness evaluation of MPSA consists of 17 socioeconomic variables measured at the Census Tract level in Franklin County, Ohio. The data were obtained from the 5-Year Estimates of the American Community Survey (ACS), conducted by the U.S. Census Bureau, and the spatial units are based on the 2020 Census Tract boundaries. Franklin County comprises a total of 328 Census Tracts. However, the tract corresponding to the airport was excluded from the analysis, as all variables for that area contained missing values. As a result, the final dataset includes 327 valid spatial units.The selected variables encompass various dimensions of socioeconomic conditions, including income, housing characteristics, racial composition, and educational attainment. The dataset includes a mix of continuous, ratio, and categorical variables. A summary of the variable definitions, units, means, and standard deviations is presented in Table \ref{tab:franklin_vars}. Also, local Moran's I significance map of some selected values and local MPSA significance map is visualized in Figure \ref{fig:data_description}
+
+\renewcommand{\arraystretch}{0.9}
+\begin{table}[H]
+\centering
+\caption{Summary statistics of variables used for MPSA calculation in Franklin County (n = 327)}
+\small
+\begin{tabular}{lp{2.5cm}rrrrr}
+\toprule
+\textbf{Variable} & \textbf{Type} & \textbf{Mean} & \textbf{Std. Dev.} & \textbf{Moran's I} & \textbf{Global MPSA} \\
+\midrule
+Median household income            & Continuous  & 35.66    & 6.52     & 0.5405 & 0.0012 \\
+Median home value                  & Continuous  & 3989.95  & 1586.34  & 0.5440 & 0.0037 \\
+Median age of residents            & Continuous  & 2051.34  & 899.54   & 0.2512 & 0.0028 \\
+Average commute time              & Continuous  & 66590.93 & 34376.5  & 0.3214 & -0.0003 \\
+Average household size            & Continuous  & 2.47     & 0.43     & 0.2522 & 0.0029 \\
+Total population                  & Continuous  & 194440   & 106613.9 & 0.2440 & 0.0016 \\
+Renter-occupied housing (\%)      & Ratio (\%)  & 47.19    & 25.08    & 0.3761 & 0.0002 \\
+Owner-occupied housing (\%)       & Ratio (\%)  & 52.81    & 25.08    & 0.3761 & 0.0003 \\
+Vacancy rate                      & Ratio (\%)  & 7.89     & 7.25     & 0.4341 & 0.0012 \\
+Percent White population          & Ratio (\%)  & 63.86    & 24.95    & 0.6425 & 0.0026 \\
+Percent Black population          & Ratio (\%)  & 24.30    & 24.32    & 0.6832 & 0.0036 \\
+Percent Asian population          & Ratio (\%)  & 4.68     & 6.35     & 0.3976 & 0.0015 \\
+Percent Hispanic population       & Ratio (\%)  & 5.70     & 5.34     & 0.2802 & -0.0019 \\
+High school graduation rate       & Ratio (\%)  & 22.06    & 11.50    & 0.6091 & 0.0002 \\
+Bachelor’s degree or higher (\%) & Ratio (\%)  & 23.94    & 13.45    & 0.6312 & 0.0053 \\
+Unemployment rate                 & Ratio (\%)  & 5.44     & 4.73     & 0.3267 & -0.0004 \\
+Primary industry classification   & Categorical & --       & --       & --     & 0.0021 \\
+\bottomrule
+\end{tabular}
+\label{tab:franklin_vars}
+\end{table}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.8\textwidth]{output/robustness/data_description.png}
+\caption{\small Local spatial association maps. (A), (B), and (C) represent the significance maps of local Moran’s I for median household income, renter-occupied housing(\%), and unemployment rate, respectively. (D) presents the local MPSA significance map, indicating clusters of spatially similar multivariate profiles. Colors denote statistically significant hotspots.}
+\label{fig:data_description}
+\end{figure}
+
+## Stability of MPSA under Random Seed and Hyperparameter Variation
+
+As previously described, the MPSA is a non-parametric statistic defined based on random forests. Because the model training process involves bootstrap sampling and random selection of predictor variables, a certain level of randomness is inherently included in the computation. Consequently, even when applied to the same dataset, MPSA values may vary if the random seed is not fixed or if different hyperparameter settings are used. To empirically assess the stability of MPSA under such randomness and sensitivity to parameter settings, MPSA was computed 100 times without fixing the random seed while varying *ntree*. This procedure enabled the consistency of the statistic’s distribution under each tree count to be examined. The reliability of the statistic was quantitatively analyzed by comparing and visualizing the mean and variance of the MPSA values for each configuration. \vspace{1em}
+
+\begin{table}[htb]
+\centering
+\caption{Mean, Standard Deviation, and Coefficient of Variation of MPSA Values by Number of Trees (\textit{ntree})}
+\label{tab:mpsa_ntree_cv}
+\begin{tabular}{cccc}
+\toprule
+\textit{ntree} & \textbf{Mean MPSA} & \textbf{Standard Deviation} & \textbf{Coefficient of Variation (CV)} \\
+\midrule
+50   & 0.033 & 0.0016  & 0.0480 \\
+100  & 0.044 & 0.0017  & 0.0386 \\
+500  & 0.058 & 0.0012  & 0.0204 \\
+1000 & 0.061 & 0.0010   & 0.0161 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+### Global MPSA
+
+As shown in Table \ref{tab:mpsa_ntree_cv}, the mean MPSA values increased with larger *ntree* values, indicating improved stability in capturing multivariate spatial structure as the ensemble size grows. Notably, the standard deviation decreased as *ntree* increased, and the coefficient of variation (CV) declined from 0.0480 at *ntree* = 50 to 0.0161 at *ntree* = 1000, suggesting enhanced statistical consistency with larger forests.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.95\textwidth]{output/robustness/global_mpsa_boxplot.png}
+\caption{\small Distribution of MPSA values across different values of \textit{ntree}}
+\label{fig:global_mpsa_boxplot}
+\end{figure}
+
+Figure \ref{fig:global_mpsa_boxplot} further visualizes the distribution of MPSA values across different *ntree* settings. The boxplots clearly show that while the central tendency (median and mean) becomes more stable with increasing *ntree*, the variability around these central values also contracts. In particular, the dispersion of MPSA values is most pronounced at *ntree* = 50, with the interquartile range decreasing as the number of trees increases.
+
+Importantly, however, even at lower values such as *ntree* = 50 or 100, the standard deviation and coefficient of variation remain sufficiently small (CV \< 0.05), indicating that the MPSA statistic exhibits a relatively high degree of stability across repetitions. This implies that, depending on computational constraints, a moderate number of trees may still be adequate to ensure reliable results without substantial loss of robustness. Thus, the proposed MPSA offers both statistical consistency and practical efficiency even under limited *ntree* sizes.
+
+### Local MPSA
+
+For the local MPSA, we adopted the same procedure used for the global statistic: without fixing the random seed, the local MPSA was computed 100 times for each of the tree counts set to 50, 100, 500, and 1000. For each spatial unit, the mean and standard deviation of the resulting local MPSA values were calculated, and the coefficient of variation (CV) was subsequently derived. The ranges of CV for each *ntree* are summarized in Table \ref{tab:local_mpsa_cv_summary} and the spatial distribution is presented in Figure \ref{fig:local_mpsa_cv}
+
+\vspace{1em}
+
+\begin{table}[htb]
+\centering
+\caption{Summary Statistics of Local MPSA Coefficient of Variation (CV) by \textit{ntree} Settings}
+\label{tab:local_mpsa_cv_summary}
+\begin{tabular}{lrrrrrr}
+\toprule
+\textit{ntree} & Min   & 1st Quartile & Median & Mean  & 3rd Quartile & Max   \\
+\midrule
+50   & 0.1436 & 0.2364 & 0.2691 & 0.2764 & 0.3090 & 0.5337 \\
+100  & 0.1104 & 0.1685 & 0.1848 & 0.1899 & 0.2103 & 0.3162 \\
+500  & 0.0493 & 0.0714 & 0.0802 & 0.0822 & 0.0909 & 0.1455 \\
+1000 & 0.0342 & 0.0513 & 0.0576 & 0.0586 & 0.0659 & 0.1100 \\
+\bottomrule
+\end{tabular}
+\end{table}
+\begin{figure}[htb]
+\centering
+\includegraphics[width=0.95\textwidth]{output/robustness/local_mpsa_cv.png}
+\caption{\small Spatial distribution of the coefficient of variation (CV) of local MPSA values across different numbers of trees in the random forest model.
+(A) \textit{ntree} = 50 (B) \textit{ntree} = 100 (C) \textit{ntree} = 500 (D) \textit{ntree} = 1000.
+The color scale indicates the relative magnitude of local instability (CV), with darker shades representing greater variability.
+All four maps use a consistent legend range (0.1–0.6) for visual comparability.}
+\label{fig:local_mpsa_cv}
+\end{figure}
+
+# Disscusion and Conclusion
+
+# Reference {#refs .unnumbered}

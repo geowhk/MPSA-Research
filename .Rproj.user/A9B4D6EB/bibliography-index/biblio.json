@@ -1,0 +1,44 @@
+{
+    "sources": [
+        {
+            "DOI": "10.1109/IVS.2019.8813994",
+            "URL": "https://ieeexplore.ieee.org/document/8813994",
+            "author": [
+                {
+                    "family": "Kruber",
+                    "given": "Friedrich"
+                },
+                {
+                    "family": "Wurst",
+                    "given": "Jonas"
+                },
+                {
+                    "family": "Morales",
+                    "given": "Eduardo Sánchez"
+                },
+                {
+                    "family": "Chakraborty",
+                    "given": "Samarjit"
+                },
+                {
+                    "family": "Botsch",
+                    "given": "Michael"
+                }
+            ],
+            "id": "kruber2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        6
+                    ]
+                ]
+            },
+            "note": "ISSN: 2642-7214 TLDR: The results show that the proposed method is an excellent approach to automatically categorize traffic scenarios, which is particularly relevant for testing autonomous vehicle functionality.",
+            "page": "2463-2470",
+            "title": "2019 IEEE intelligent vehicles symposium (IV)",
+            "type": "paper-conference"
+        }
+    ],
+    "project_biblios": []
+}

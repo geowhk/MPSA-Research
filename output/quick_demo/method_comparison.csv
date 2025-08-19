@@ -1,0 +1,4 @@
+"Method","Statistic","P_value","Features"
+"MPSA (Multivariate)",0.1658,0.001,"모든 14개 변수 동시 분석"
+"PCA + Moran's I",0.6216,2.88551409097384e-84,"PC1만 사용 (36.9% 설명력)"
+"Best Individual Moran's I",0,NA,"med_age 변수만"

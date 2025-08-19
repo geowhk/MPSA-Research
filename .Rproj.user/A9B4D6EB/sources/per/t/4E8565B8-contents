@@ -1,0 +1,60 @@
+---
+title: "Developing Multivariate Proximity-based Spatial Autocorrelation Statistics Using Random Forests"
+author: Woohyung Kim
+format: 
+  pdf:
+    documentclass: article
+    toc: false
+    number-sections: true
+    linestretch: 2
+    keep-tex: true
+    fig-cap-location: bottom
+    tbl-cap-location: top
+    link-citations: true
+    geometry: left=2.5cm, right=2.5cm, top=3cm, bottom=3cm
+bibliography: reference.bib
+csl: apa.csl
+---
+
+## Equation
+This is @eq-proximity:
+
+$$
+\mathbf{P}_{ij} = \frac{1}{T} \sum_{t=1}^{T} \mathbf{1}\left( L_t(i) = L_t(j) \right)
+$$ {#eq-proximity}
+
+This is citation[@breiman2001]
+
+This is Table \ref{tab:mpsa_ntree_cv}
+
+\begin{table}[htbp]
+\centering
+\caption{Mean, Standard Deviation, and Coefficient of Variation of MPSA Values by Number of Trees (\textit{ntree})}
+\label{tab:mpsa_ntree_cv}
+\begin{tabular}{cccc}
+\toprule
+\textit{ntree} & \textbf{Mean MPSA} & \textbf{Standard Deviation} & \textbf{Coefficient of Variation (CV)} \\
+\midrule
+50   & 0.0333 & 0.00160  & 0.0480 \\
+100  & 0.0444 & 0.00171  & 0.0386 \\
+500  & 0.0584 & 0.00119  & 0.0204 \\
+1000 & 0.0607 & 0.00098   & 0.0161 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+This is Figure \ref{fig:local_moran}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{output/robustness/data_description.png}
+\caption{\small Moran Significance Map. (A) Median Income (B) Renter-occupied housing (C) Unemployment Rate}
+\label{fig:local_moran}
+\end{figure}
+
+
+
+
+
+

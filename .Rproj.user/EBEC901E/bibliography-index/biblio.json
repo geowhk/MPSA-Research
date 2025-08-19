@@ -1,0 +1,816 @@
+{
+    "sources": [
+        {
+            "author": [
+                {
+                    "family": "Yang",
+                    "given": "Guangchao"
+                },
+                {
+                    "family": "Wang",
+                    "given": "Liuhong"
+                },
+                {
+                    "family": "Gu",
+                    "given": "Wen"
+                },
+                {
+                    "family": "Gu",
+                    "given": "Jie"
+                },
+                {
+                    "family": "Fan",
+                    "given": "Deling"
+                },
+                {
+                    "family": "Liang",
+                    "given": "Mengyuan"
+                },
+                {
+                    "family": "Liu",
+                    "given": "Jining"
+                },
+                {
+                    "family": "Wang",
+                    "given": "Zhen"
+                }
+            ],
+            "container-title": "Ecological Indicators",
+            "id": "yang2024soil",
+            "issued": {
+                "date-parts": [
+                    [
+                        2024
+                    ]
+                ]
+            },
+            "page": "112270",
+            "publisher": "Elsevier",
+            "title": "Soil ecological risk assessment of ten industrial areas in china based on the TRIAD and VIKOR methods",
+            "type": "article-journal",
+            "volume": "166"
+        },
+        {
+            "author": [
+                {
+                    "family": "Breiman",
+                    "given": "Leo"
+                }
+            ],
+            "container-title": "Machine Learning",
+            "id": "breiman2001",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2001
+                    ]
+                ]
+            },
+            "page": "5-32",
+            "title": "Random forests",
+            "type": "article-journal",
+            "volume": "45"
+        },
+        {
+            "author": [
+                {
+                    "family": "Breiman",
+                    "given": "Leo"
+                }
+            ],
+            "id": "breiman2003",
+            "issued": {
+                "date-parts": [
+                    [
+                        2003
+                    ]
+                ]
+            },
+            "note": "Technical report",
+            "title": "Manual on setting up, using, and understanding random forests V3.1",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Shi",
+                    "given": "Tao"
+                },
+                {
+                    "family": "Horvath",
+                    "given": "Steve"
+                }
+            ],
+            "container-title": "Journal of Computational and Graphical Statistics",
+            "id": "shi2006",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2006
+                    ]
+                ]
+            },
+            "page": "118-138",
+            "title": "Unsupervised learning with random forest predictors",
+            "type": "article-journal",
+            "volume": "15"
+        },
+        {
+            "author": [
+                {
+                    "family": "Benjamini",
+                    "given": "Yoav"
+                },
+                {
+                    "family": "Hochberg",
+                    "given": "Yosef"
+                }
+            ],
+            "container-title": "Journal of the Royal Statistical Society: Series B (Methodological)",
+            "id": "benjamini1995",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        1995
+                    ]
+                ]
+            },
+            "page": "289-300",
+            "title": "Controlling the false discovery rate: A practical and powerful approach to multiple testing",
+            "title-short": "Controlling the false discovery rate",
+            "type": "article-journal",
+            "volume": "57"
+        },
+        {
+            "author": [
+                {
+                    "family": "Probst",
+                    "given": "Philipp"
+                },
+                {
+                    "family": "Wright",
+                    "given": "Marvin N."
+                },
+                {
+                    "family": "Boulesteix",
+                    "given": "Anne-Laure"
+                }
+            ],
+            "container-title": "Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery",
+            "id": "probst2019",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019
+                    ]
+                ]
+            },
+            "page": "e1301",
+            "title": "Hyperparameters and tuning strategies for random forest",
+            "type": "article-journal",
+            "volume": "9"
+        },
+        {
+            "DOI": "10.1111/j.1538-4632.1995.tb00338.x",
+            "URL": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1995.tb00338.x",
+            "author": [
+                {
+                    "family": "Anselin",
+                    "given": "Luc"
+                }
+            ],
+            "container-title": "Geographical Analysis",
+            "id": "anselin1995",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1995
+                    ]
+                ]
+            },
+            "language": "en",
+            "note": "_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1538-4632.1995.tb00338.x",
+            "page": "93-115",
+            "title": "Local Indicators of Spatial AssociationLISA",
+            "type": "article-journal",
+            "volume": "27"
+        },
+        {
+            "DOI": "10.1023/A:1010933404324",
+            "URL": "https://doi.org/10.1023/A:1010933404324",
+            "author": [
+                {
+                    "family": "Breiman",
+                    "given": "Leo"
+                }
+            ],
+            "container-title": "Machine Learning",
+            "id": "breiman2001a",
+            "issue": "1",
+            "issued": {
+                "date-parts": [
+                    [
+                        2001,
+                        10,
+                        1
+                    ]
+                ]
+            },
+            "language": "en",
+            "page": "5-32",
+            "title": "Random Forests",
+            "type": "article-journal",
+            "volume": "45"
+        },
+        {
+            "URL": "https://www.jstor.org/stable/2332142?origin=crossref&seq=1",
+            "id": "noteson",
+            "title": "Notes on continuous stochastic phenomena on JSTOR",
+            "type": ""
+        },
+        {
+            "DOI": "10.2307/2332142",
+            "URL": "https://www.jstor.org/stable/2332142",
+            "author": [
+                {
+                    "family": "Moran",
+                    "given": "P. A. P."
+                }
+            ],
+            "container-title": "Biometrika",
+            "id": "moran1950",
+            "issue": "1/2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1950
+                    ]
+                ]
+            },
+            "note": "Publisher: [Oxford University Press, Biometrika Trust]",
+            "page": "17-23",
+            "title": "Notes on continuous stochastic phenomena",
+            "type": "article-journal",
+            "volume": "37"
+        },
+        {
+            "DOI": "10.2307/2986645",
+            "URL": "https://www.jstor.org/stable/2986645",
+            "author": [
+                {
+                    "family": "Geary",
+                    "given": "R. C."
+                }
+            ],
+            "container-title": "The Incorporated Statistician",
+            "id": "geary1954",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1954
+                    ]
+                ]
+            },
+            "note": "Publisher: [Royal Statistical Society, Wiley]",
+            "page": "115-146",
+            "title": "The contiguity ratio and statistical mapping",
+            "type": "article-journal",
+            "volume": "5"
+        },
+        {
+            "DOI": "10.1111/gean.12164",
+            "URL": "https://onlinelibrary.wiley.com/doi/10.1111/gean.12164",
+            "author": [
+                {
+                    "family": "Anselin",
+                    "given": "Luc"
+                }
+            ],
+            "container-title": "Geographical Analysis",
+            "id": "anselin2019",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        4
+                    ]
+                ]
+            },
+            "language": "en",
+            "note": "TLDR: This paper extends the application of the Local Geary c statistic to a multivariate context and conceptualizes the statistic as a weighted distance in multivariate attribute space between an observation and its geographical neighbors.",
+            "page": "133-150",
+            "title": "A Local Indicator of Multivariate Spatial Association: Extending Geary’s <i>c</i>",
+            "title-short": "A Local Indicator of Multivariate Spatial Association",
+            "type": "article-journal",
+            "volume": "51"
+        },
+        {
+            "DOI": "10.1111/j.1538-4632.1995.tb00338.x",
+            "URL": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1995.tb00338.x",
+            "author": [
+                {
+                    "family": "Anselin",
+                    "given": "Luc"
+                }
+            ],
+            "container-title": "Geographical Analysis",
+            "id": "anselin1995",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        1995
+                    ]
+                ]
+            },
+            "language": "en",
+            "note": "_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1538-4632.1995.tb00338.x",
+            "page": "93-115",
+            "title": "Local Indicators of Spatial AssociationLISA",
+            "type": "article-journal",
+            "volume": "27"
+        },
+        {
+            "DOI": "10.1111/j.1538-4632.1985.tb00849.x",
+            "URL": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1985.tb00849.x",
+            "author": [
+                {
+                    "family": "Wartenberg",
+                    "given": "Daniel"
+                }
+            ],
+            "container-title": "Geographical Analysis",
+            "id": "wartenberg1985",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        1985
+                    ]
+                ]
+            },
+            "language": "en",
+            "note": "_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1538-4632.1985.tb00849.x",
+            "page": "263-283",
+            "title": "Multivariate Spatial Correlation: A Method for Exploratory Geographical Analysis",
+            "title-short": "Multivariate Spatial Correlation",
+            "type": "article-journal",
+            "volume": "17"
+        },
+        {
+            "DOI": "10.1111/gean.12355",
+            "URL": "https://onlinelibrary.wiley.com/doi/10.1111/gean.12355",
+            "author": [
+                {
+                    "family": "Lin",
+                    "given": "Jie"
+                }
+            ],
+            "container-title": "Geographical Analysis",
+            "id": "lin2023",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2023,
+                        10
+                    ]
+                ]
+            },
+            "language": "en",
+            "page": "685-702",
+            "title": "Comparison of Moran’s <i>I</i> and Geary’s <i>c</i> in Multivariate Spatial Pattern Analysis",
+            "type": "article-journal",
+            "volume": "55"
+        },
+        {
+            "DOI": "10.1007/s101090100064",
+            "URL": "http://link.springer.com/10.1007/s101090100064",
+            "author": [
+                {
+                    "family": "Lee",
+                    "given": "Sang-Il"
+                }
+            ],
+            "container-title": "Journal of Geographical Systems",
+            "id": "lee2001",
+            "issue": "4",
+            "issued": {
+                "date-parts": [
+                    [
+                        2001,
+                        12,
+                        1
+                    ]
+                ]
+            },
+            "language": "en",
+            "note": "TLDR: This study devises an L statistic by integrating Pearson’s r as an aspatial bivariate association measure and Moran’s I as a univariate spatial association measure using the concept of a spatial smoothing scalar.",
+            "page": "369-385",
+            "title": "Developing a bivariate spatial association measure: An integration of Pearson’s r and Moran’s I",
+            "title-short": "Developing a bivariate spatial association measure",
+            "type": "article-journal",
+            "volume": "3"
+        },
+        {
+            "DOI": "10.1111/j.1538-4632.1992.tb00261.x",
+            "URL": "https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1992.tb00261.x",
+            "author": [
+                {
+                    "family": "Getis",
+                    "given": "Arthur"
+                },
+                {
+                    "family": "Ord",
+                    "given": "J. K."
+                }
+            ],
+            "container-title": "Geographical Analysis",
+            "id": "getis1992",
+            "issue": "3",
+            "issued": {
+                "date-parts": [
+                    [
+                        1992
+                    ]
+                ]
+            },
+            "language": "en",
+            "note": "_eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1538-4632.1992.tb00261.x",
+            "page": "189-206",
+            "title": "The Analysis of Spatial Association by Use of Distance Statistics",
+            "type": "article-journal",
+            "volume": "24"
+        },
+        {
+            "DOI": "10.1109/TSMCC.2008.923876",
+            "URL": "https://ieeexplore.ieee.org/document/4603103",
+            "author": [
+                {
+                    "family": "Zhang",
+                    "given": "Jiong"
+                },
+                {
+                    "family": "Zulkernine",
+                    "given": "Mohammad"
+                },
+                {
+                    "family": "Haque",
+                    "given": "Anwar"
+                }
+            ],
+            "container-title": "IEEE Transactions on Systems, Man, and Cybernetics, Part C (Applications and Reviews)",
+            "id": "zhang2008",
+            "issue": "5",
+            "issued": {
+                "date-parts": [
+                    [
+                        2008,
+                        9
+                    ]
+                ]
+            },
+            "page": "649-659",
+            "title": "Random-forests-based network intrusion detection systems",
+            "type": "article-journal",
+            "volume": "38"
+        },
+        {
+            "DOI": "10.1109/JSTARS.2015.2396577",
+            "URL": "https://ieeexplore.ieee.org/document/7039573",
+            "author": [
+                {
+                    "family": "Peerbhay",
+                    "given": "Kabir Yunus"
+                },
+                {
+                    "family": "Mutanga",
+                    "given": "Onisimo"
+                },
+                {
+                    "family": "Ismail",
+                    "given": "Riyad"
+                }
+            ],
+            "container-title": "IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing",
+            "id": "peerbhay2015",
+            "issue": "6",
+            "issued": {
+                "date-parts": [
+                    [
+                        2015,
+                        6
+                    ]
+                ]
+            },
+            "note": "TLDR: Overall, this research has demonstrated the potential of utilizing an unsupervised and accurate RF framework for the detection and mapping of alien invasive plants.",
+            "page": "3107-3122",
+            "title": "Random forests unsupervised classification: The detection and mapping of solanum mauritianum infestations in plantation forestry using hyperspectral data",
+            "title-short": "Random forests unsupervised classification",
+            "type": "article-journal",
+            "volume": "8"
+        },
+        {
+            "DOI": "10.1109/TEST.2007.4437626",
+            "URL": "https://ieeexplore.ieee.org/document/4437626",
+            "author": [
+                {
+                    "family": "Wu",
+                    "given": "Sean H."
+                },
+                {
+                    "family": "Lee",
+                    "given": "Benjamin N."
+                },
+                {
+                    "family": "Wang",
+                    "given": "Li-C."
+                },
+                {
+                    "family": "Abadir",
+                    "given": "Magdy S."
+                }
+            ],
+            "container-title": "2007 IEEE International Test Conference",
+            "id": "wu2007",
+            "issued": {
+                "date-parts": [
+                    [
+                        2007,
+                        10
+                    ]
+                ]
+            },
+            "note": "ISSN: 2378-2250",
+            "page": "1-10",
+            "title": "Statistical analysis and optimization of parametric delay test",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.1109/AiDAS56890.2022.9918724",
+            "URL": "https://ieeexplore.ieee.org/document/9918724",
+            "author": [
+                {
+                    "family": "Omar",
+                    "given": "Zaturrawiah Ali"
+                },
+                {
+                    "family": "Abu Bakar",
+                    "given": "Mohd Aftar"
+                },
+                {
+                    "family": "Zamzuri",
+                    "given": "Zamira Hasanah"
+                },
+                {
+                    "family": "Ariff",
+                    "given": "Noratiqah Mohd"
+                }
+            ],
+            "container-title": "2022 3rd International Conference on Artificial Intelligence and Data Sciences (AiDAS)",
+            "id": "omar2022",
+            "issued": {
+                "date-parts": [
+                    [
+                        2022,
+                        9
+                    ]
+                ]
+            },
+            "note": "TLDR: The performance of the employed encoding methods was equal when applied to the dataset and, together with binning, those conditions were able to detect more perfect matches, and the optimal threshold was determined using the maximum F -measure.",
+            "page": "66-71",
+            "title": "Duplicate detection using unsupervised random forests: A preliminary analysis",
+            "title-short": "Duplicate detection using unsupervised random forests",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.1109/WHISPERS.2016.8071797",
+            "URL": "https://ieeexplore.ieee.org/document/8071797",
+            "author": [
+                {
+                    "family": "Peerbhay",
+                    "given": "Kabir"
+                },
+                {
+                    "family": "Mutanga",
+                    "given": "Onisimo"
+                },
+                {
+                    "family": "Lottering",
+                    "given": "Romano"
+                },
+                {
+                    "family": "Ismail",
+                    "given": "Riyad"
+                }
+            ],
+            "container-title": "2016 8th Workshop on Hyperspectral Image and Signal Processing: Evolution in Remote Sensing (WHISPERS)",
+            "id": "peerbhay2016",
+            "issued": {
+                "date-parts": [
+                    [
+                        2016,
+                        8
+                    ]
+                ]
+            },
+            "note": "ISSN: 2158-6276 TLDR: Overall, this research has shown the potential of combining hyperspectral information with LiDAR derived height to precisely map the occurrence of riparian bugweed using an automated unsupervised RF anomaly detection framework.",
+            "page": "1-5",
+            "title": "Unsupervised anomaly weed detection in riparian forest areas using hyperspectral data and LiDAR",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Lee",
+                    "given": "Monghyeon"
+                }
+            ],
+            "container-title": "Journal of the Korean Cartographic Association",
+            "id": "lee2012",
+            "issue": "2",
+            "issued": {
+                "date-parts": [
+                    [
+                        2012
+                    ]
+                ]
+            },
+            "language": "en",
+            "page": "37-46",
+            "title": "Multivariate Spatial Cluster Analysis Using Mahalanobis Distance",
+            "type": "article-journal",
+            "volume": "12"
+        },
+        {
+            "DOI": "10.1109/IVS.2019.8813994",
+            "URL": "https://ieeexplore.ieee.org/document/8813994",
+            "author": [
+                {
+                    "family": "Kruber",
+                    "given": "Friedrich"
+                },
+                {
+                    "family": "Wurst",
+                    "given": "Jonas"
+                },
+                {
+                    "family": "Morales",
+                    "given": "Eduardo Sánchez"
+                },
+                {
+                    "family": "Chakraborty",
+                    "given": "Samarjit"
+                },
+                {
+                    "family": "Botsch",
+                    "given": "Michael"
+                }
+            ],
+            "container-title": "2019 IEEE Intelligent Vehicles Symposium (IV)",
+            "id": "kruber2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        6
+                    ]
+                ]
+            },
+            "note": "ISSN: 2642-7214 TLDR: The results show that the proposed method is an excellent approach to automatically categorize traffic scenarios, which is particularly relevant for testing autonomous vehicle functionality.",
+            "page": "2463-2470",
+            "title": "Unsupervised and supervised learning with the random forest algorithm for traffic scenario clustering and classification",
+            "type": "article-journal"
+        },
+        {
+            "DOI": "10.1109/IVS.2019.8813994",
+            "URL": "https://ieeexplore.ieee.org/document/8813994",
+            "author": [
+                {
+                    "family": "Kruber",
+                    "given": "Friedrich"
+                },
+                {
+                    "family": "Wurst",
+                    "given": "Jonas"
+                },
+                {
+                    "family": "Morales",
+                    "given": "Eduardo Sánchez"
+                },
+                {
+                    "family": "Chakraborty",
+                    "given": "Samarjit"
+                },
+                {
+                    "family": "Botsch",
+                    "given": "Michael"
+                }
+            ],
+            "container-title": "2019 IEEE Intelligent Vehicles Symposium (IV)",
+            "id": "kruber2019",
+            "issued": {
+                "date-parts": [
+                    [
+                        2019,
+                        6
+                    ]
+                ]
+            },
+            "note": "ISSN: 2642-7214 TLDR: The results show that the proposed method is an excellent approach to automatically categorize traffic scenarios, which is particularly relevant for testing autonomous vehicle functionality.",
+            "page": "2463-2470",
+            "title": "Unsupervised and supervised learning with the random forest algorithm for traffic scenario clustering and classification",
+            "type": "article-journal"
+        },
+        {
+            "author": [
+                {
+                    "family": "Beyer",
+                    "given": "Kevin"
+                },
+                {
+                    "family": "Goldstein",
+                    "given": "Jonathan"
+                },
+                {
+                    "family": "Ramakrishnan",
+                    "given": "Raghu"
+                },
+                {
+                    "family": "Shaft",
+                    "given": "Uri"
+                }
+            ],
+            "editor": [
+                {
+                    "family": "Beeri",
+                    "given": "Catriel"
+                },
+                {
+                    "family": "Buneman",
+                    "given": "Peter"
+                }
+            ],
+            "id": "beyer1999",
+            "issued": {
+                "date-parts": [
+                    [
+                        1999
+                    ]
+                ]
+            },
+            "page": "217235",
+            "publisher": "Springer Berlin Heidelberg",
+            "publisher-place": "Berlin, Heidelberg",
+            "title": "When is “nearest neighbor” meaningful?",
+            "type": "chapter"
+        },
+        {
+            "author": [
+                {
+                    "family": "Aggarwal",
+                    "given": "Charu C."
+                },
+                {
+                    "family": "Hinneburg",
+                    "given": "Alexander"
+                },
+                {
+                    "family": "Keim",
+                    "given": "Daniel A."
+                }
+            ],
+            "editor": [
+                {
+                    "family": "Van den Bussche",
+                    "given": "Jan"
+                },
+                {
+                    "family": "Vianu",
+                    "given": "Victor"
+                }
+            ],
+            "id": "aggarwal2001",
+            "issued": {
+                "date-parts": [
+                    [
+                        2001
+                    ]
+                ]
+            },
+            "page": "420434",
+            "publisher": "Springer Berlin Heidelberg",
+            "publisher-place": "Berlin, Heidelberg",
+            "title": "On the surprising behavior of distance metrics in high dimensional space",
+            "type": "chapter"
+        }
+    ],
+    "project_biblios": []
+}

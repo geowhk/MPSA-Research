@@ -1,0 +1,175 @@
+---
+title: "Unsupervised Random Forest and Proximity Matrix"
+subtitle: "addressing the sparsity issue of the Proximity Matrix"
+format: 
+  html:
+    link-citations: true
+    pdf-engine: lualatex
+    mainfont: "Malgun Gothic"
+    embed-resources: true
+csl: apa.csl
+bibliography: references.bib
+---
+
+Unsupervised Random Forest 기반 Proximity를 활용한 다양한 연구들을 탐색해보았습니다. 특히 교수님께서 말씀하셨던 문제, proximity matrix에 0이 너무 많은 sparsity 문제에 대해 다루거나, 이를 해결하는 방식에 대해 언급하는 내용을 찾고자 했습니다. 결과적으로, 기존 문헌에서 행렬의 sparsity 문제를 해결하는 구체적 방식을 명확하게 논하고 있는 연구는 없었으나, @kruber2019 가 제시한 path proximity가 저희가 찾는 대안이 될 수 있을 것 같습니다.
+
+Path Proximity는 leaf node의 정보만을 활용하는 기존 유사성 계산과는 다르게 트리가 분기함에 따라 관측개체가 방문하는 모든 노드의 정보를 활용하여 계산됩니다. $b$번째 트리에서 관측개체 $i$가 방문하는 노드의 집합을 $\mathcal{T}_{i, b}$이라고 하면, $b$번째 트리에서의 Path Proximity $P_{ij}(b)$는 관측 개체 $i$의 방문 노드와 $j$의 방문 노드 간의 Jaccard Similarity로 측정됩니다.
+
+$$
+P_{ij}(b) = \frac{|\mathcal{T}_{i,b} \cap \mathcal{T}_{j,b}|}{|\mathcal{T}_{i,b} \cup \mathcal{T}_{j,b}|} = \frac{|\mathcal{T}_{i,b} \cap \mathcal{T}_{j,b}|}{|\mathcal{T}_{i,b}| + |\mathcal{T}_{j,b}| - |\mathcal{T}_{i,b} \cap \mathcal{T}_{j,b}|}
+$$
+최종 Proximtity $P_{ij}$는 트리별 Path Proximity를 전체 트리 개수로 나눈 것입니다. 이 값은 $(0, 1]$의 범위를 가집니다.
+
+$$
+P_{ij} = \frac{1}{B} \sum_{b=1}^B P_{ij}(b)
+$$
+
+Path Proxmity의 장점은 크게 세 가지입니다.
+
+1.  유사성이 매우 떨어지는 관측 개체 간에도 트리가 시작되는 루트 노드는 공유하기 때문에 proximity 값이 절대 0이 나오지 않습니다.
+2.  트리 전체의 정보를 활용할 수 있습니다.
+3.  의미 있는 proximity 값을 얻기 위해서 임의로 리프 노드 크기와 관련된 하이퍼파라미터를 조절할 필요가 없습니다. 논문에서도 트리를 최대한 분기한 뒤 Path Proximity를 계산하는 것이 유용한 결과를 낸다고 언급하고 있습니다[@kruber2019].
+
+Path Proxmity의 단점은 계산 시간 문제입니다. 기존의 Proximity 계산은 리프 노드만을 고려하면 되었으나, 새로운 방식은 트리를 구성하는 전체 노드를 모두 고려해야 합니다. 실제로 제가 계속 사용하고 있는 Franklin County 데이터(관측개체 327개, 변수 17개)에 대해 기본 파라미터 세팅(tree 500개)으로 Path Proximity를 구해보았는데, `future` 패키지를 활용한 병렬 연산을 적용했음에도 약 2-3분의 시간이 소요되었습니다.
+
+```{r}
+#| echo: true
+#| eval: false
+
+# Load Packages
+library(tidyverse)
+library(randomForest)
+library(sf)
+library(pbapply)
+library(future)
+library(future.apply)
+library(progressr)
+
+# Data Preparation
+franklin <- readRDS("data/franklin.rds")
+data <- franklin |>
+  st_drop_geometry() |> 
+  dplyr::select(where(is.numeric), main_industry)
+
+
+# Define Function for Path Proximity
+compute_path_proximity_urf_parallel <- function(data, 
+                                                n_tree = 500,
+                                                workers = 4) {
+  set.seed(42)
+  
+  # ---- 0. Set parallel computing environment ----
+  plan(multisession, workers = workers)
+  handlers(global = TRUE)
+  
+  n <- nrow(data)
+  p <- ncol(data)
+  
+  # ---- 1. Random Forest modeling (Addcl1 method) ----
+  synthetic <- as.data.frame(lapply(data,
+                                    function(col) sample(col, replace = TRUE)))
+  data_all <- rbind(data, synthetic)
+  y_all <- factor(c(rep("real", nrow(data)),
+                    rep("synthetic", nrow(synthetic))))
+  
+  rf <- randomForest(x = data_all,
+                     y = y_all,
+                     proximity = TRUE,
+                     ntree = 500)
+  
+  # ---- 2. Function to compute paths for each tree ----
+  get_paths <- function(tree_num) {
+    tree <- getTree(rf, k = tree_num, labelVar = FALSE)
+    paths <- vector("list", 2 * n)
+    for (i in 1:(2 * n)) {
+      path <- c()
+      node <- 1
+      repeat {
+        path <- c(path, node)
+        split_var <- tree[node, "split var"]
+        if (split_var == 0) break
+        split_val <- tree[node, "split point"]
+        if (data_all[i, split_var] <= split_val) {
+          node <- tree[node, "left daughter"]
+        } else {
+          node <- tree[node, "right daughter"]
+        }
+      }
+      paths[[i]] <- path
+    }
+    return(paths)
+  }
+  
+  # ---- 3. Compute all paths in parallel ----
+  message("Computing paths for all trees in parallel...")
+  all_paths <- future_lapply(1:n_tree, get_paths,
+                             future.packages = "randomForest")
+  
+  # ---- 4. Compute proximity matrix in parallel ----
+  message("Calculating path proximity matrix in parallel...")
+  
+  proximity <- matrix(0, nrow = n, ncol = n)
+  
+  # Set progress bar
+  p <- progressor(steps = n_tree)
+  
+  tree_jaccard <- function(b) {
+    paths <- all_paths[[b]]
+    mtx <- matrix(0, nrow = n, ncol = n)
+    for (i in 1:n) {
+      Ti <- paths[[i]]
+      for (j in i:n) {
+        Tj <- paths[[j]]
+        intersect_len <- length(intersect(Ti, Tj))
+        union_len <- length(union(Ti, Tj))
+        jaccard <- intersect_len / union_len
+        mtx[i, j] <- jaccard
+        if (i != j) {
+          mtx[j, i] <- jaccard
+        }
+      }
+    }
+    p()
+    return(mtx)
+  }
+  
+  # Execute in parallel with progress tracking
+  with_progress({
+    mtx_list <- future_lapply(1:n_tree, tree_jaccard)
+  })
+  
+  # ---- 5. Aggregate and normalize the results ----
+  for (m in mtx_list) {
+    proximity <- proximity + m
+  }
+  proximity <- proximity / n_tree
+  
+  rownames(proximity) <- rownames(data)
+  colnames(proximity) <- rownames(data)
+  
+  return(proximity)
+}
+
+P <- compute_path_proximity_urf_parallel(data)
+```
+
+```{r}
+#| echo: false
+#| eval: true
+#| results: hide
+
+library(readr)
+
+P <- read_rds("PathProximity.rds")
+```
+
+```{r}
+# Distribution of P matrix(off-diagonal)
+off_diag_values <- P[lower.tri(P)]
+summary(off_diag_values)
+```
+
+```{r}
+# Histogram
+hist(off_diag_values)
+```

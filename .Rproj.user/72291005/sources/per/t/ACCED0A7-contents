@@ -1,0 +1,319 @@
+@article{yang2024soil,
+  title={Soil ecological risk assessment of ten industrial areas in China based on the TRIAD and VIKOR methods},
+  author={Yang, Guangchao and Wang, Liuhong and Gu, Wen and Gu, Jie and Fan, Deling and Liang, Mengyuan and Liu, Jining and Wang, Zhen},
+  journal={Ecological Indicators},
+  volume={166},
+  pages={112270},
+  year={2024},
+  publisher={Elsevier}
+}
+
+@article{breiman2001,
+  author = {Breiman, Leo},
+  title = {Random Forests},
+  journal = {Machine Learning},
+  year = {2001},
+  volume = {45},
+  number = {1},
+  pages = {5--32}
+}
+
+@article{breiman2003,
+  author = {Breiman, Leo},
+  title = {Manual On Setting Up, Using, And Understanding Random Forests V3.1},
+  year = {2003},
+  note = {Technical report}
+}
+
+@article{shi2006,
+  author = {Shi, Tao and Horvath, Steve},
+  title = {Unsupervised Learning With Random Forest Predictors},
+  journal = {Journal of Computational and Graphical Statistics},
+  year = {2006},
+  volume = {15},
+  number = {1},
+  pages = {118--138}
+}
+
+@article{benjamini1995,
+  author    = {Yoav Benjamini and Yosef Hochberg},
+  title     = {Controlling the False Discovery Rate: A Practical and Powerful Approach to Multiple Testing},
+  journal   = {Journal of the Royal Statistical Society: Series B (Methodological)},
+  year      = {1995},
+  volume    = {57},
+  number    = {1},
+  pages     = {289--300}
+}
+
+@article{probst2019,
+  author  = {Probst, Philipp and Wright, Marvin N. and Boulesteix, Anne-Laure},
+  title   = {Hyperparameters and Tuning Strategies for Random Forest},
+  journal = {Wiley Interdisciplinary Reviews: Data Mining and Knowledge Discovery},
+  year    = {2019},
+  volume  = {9},
+  number  = {3},
+  pages   = {e1301}
+}
+@article{anselin1995,
+	title = {Local Indicators of Spatial Association{\textemdash}LISA},
+	author = {Anselin, Luc},
+	year = {1995},
+	date = {1995},
+	journal = {Geographical Analysis},
+	pages = {93--115},
+	volume = {27},
+	number = {2},
+	doi = {10.1111/j.1538-4632.1995.tb00338.x},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1995.tb00338.x},
+	note = {{\_}eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1538-4632.1995.tb00338.x},
+	langid = {en}
+}
+
+@article{breiman2001a,
+	title = {Random Forests},
+	author = {Breiman, Leo},
+	year = {2001},
+	month = {10},
+	date = {2001-10-01},
+	journal = {Machine Learning},
+	pages = {5--32},
+	volume = {45},
+	number = {1},
+	doi = {10.1023/A:1010933404324},
+	url = {https://doi.org/10.1023/A:1010933404324},
+	langid = {en}
+}
+
+@misc{noteson,
+	title = {Notes on Continuous Stochastic Phenomena on JSTOR},
+	url = {https://www.jstor.org/stable/2332142?origin=crossref&seq=1}
+}
+
+@article{moran1950,
+	title = {Notes on Continuous Stochastic Phenomena},
+	author = {Moran, P. A. P.},
+	year = {1950},
+	date = {1950},
+	journal = {Biometrika},
+	pages = {17--23},
+	volume = {37},
+	number = {1/2},
+	doi = {10.2307/2332142},
+	url = {https://www.jstor.org/stable/2332142},
+	note = {Publisher: [Oxford University Press, Biometrika Trust]}
+}
+
+@article{geary1954,
+	title = {The Contiguity Ratio and Statistical Mapping},
+	author = {Geary, R. C.},
+	year = {1954},
+	date = {1954},
+	journal = {The Incorporated Statistician},
+	pages = {115--146},
+	volume = {5},
+	number = {3},
+	doi = {10.2307/2986645},
+	url = {https://www.jstor.org/stable/2986645},
+	note = {Publisher: [Royal Statistical Society, Wiley]}
+}
+
+@article{anselin2019,
+	title = {A Local Indicator of Multivariate Spatial Association: Extending Geary's {\emph{c}}},
+	author = {Anselin, Luc},
+	year = {2019},
+	month = {04},
+	date = {2019-04},
+	journal = {Geographical Analysis},
+	pages = {133--150},
+	volume = {51},
+	number = {2},
+	doi = {10.1111/gean.12164},
+	url = {https://onlinelibrary.wiley.com/doi/10.1111/gean.12164},
+	note = {TLDR: This paper extends the application of the Local Geary c statistic to a multivariate context and conceptualizes the statistic as a weighted distance in multivariate attribute space between an observation and its geographical neighbors.},
+	langid = {en}
+}
+
+@article{anselin1995,
+	title = {Local Indicators of Spatial Association{\textemdash}LISA},
+	author = {Anselin, Luc},
+	year = {1995},
+	date = {1995},
+	journal = {Geographical Analysis},
+	pages = {93--115},
+	volume = {27},
+	number = {2},
+	doi = {10.1111/j.1538-4632.1995.tb00338.x},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1995.tb00338.x},
+	note = {{\_}eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1538-4632.1995.tb00338.x},
+	langid = {en}
+}
+
+@article{wartenberg1985,
+	title = {Multivariate Spatial Correlation: A Method for Exploratory Geographical Analysis},
+	author = {Wartenberg, Daniel},
+	year = {1985},
+	date = {1985},
+	journal = {Geographical Analysis},
+	pages = {263--283},
+	volume = {17},
+	number = {4},
+	doi = {10.1111/j.1538-4632.1985.tb00849.x},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1985.tb00849.x},
+	note = {{\_}eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1538-4632.1985.tb00849.x},
+	langid = {en}
+}
+
+@article{lin2023,
+	title = {Comparison of Moran's {\emph{I}} and Geary's {\emph{c}} in Multivariate Spatial Pattern Analysis},
+	author = {Lin, Jie},
+	year = {2023},
+	month = {10},
+	date = {2023-10},
+	journal = {Geographical Analysis},
+	pages = {685--702},
+	volume = {55},
+	number = {4},
+	doi = {10.1111/gean.12355},
+	url = {https://onlinelibrary.wiley.com/doi/10.1111/gean.12355},
+	langid = {en}
+}
+
+@article{lee2001,
+	title = {Developing a bivariate spatial association measure: An integration of Pearson's r and Moran's I},
+	author = {Lee, Sang-Il},
+	year = {2001},
+	month = {12},
+	date = {2001-12-01},
+	journal = {Journal of Geographical Systems},
+	pages = {369--385},
+	volume = {3},
+	number = {4},
+	doi = {10.1007/s101090100064},
+	url = {http://link.springer.com/10.1007/s101090100064},
+	note = {TLDR: This study devises an L statistic by integrating Pearson's r as an aspatial bivariate association measure and Moran's I as a univariate spatial association measure using the concept of a spatial smoothing scalar.},
+	langid = {en}
+}
+
+@article{getis1992,
+	title = {The Analysis of Spatial Association by Use of Distance Statistics},
+	author = {Getis, Arthur and Ord, J. K.},
+	year = {1992},
+	date = {1992},
+	journal = {Geographical Analysis},
+	pages = {189--206},
+	volume = {24},
+	number = {3},
+	doi = {10.1111/j.1538-4632.1992.tb00261.x},
+	url = {https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1538-4632.1992.tb00261.x},
+	note = {{\_}eprint: https://onlinelibrary.wiley.com/doi/pdf/10.1111/j.1538-4632.1992.tb00261.x},
+	langid = {en}
+}
+
+@article{zhang2008,
+	title = {Random-Forests-Based Network Intrusion Detection Systems},
+	author = {Zhang, Jiong and Zulkernine, Mohammad and Haque, Anwar},
+	year = {2008},
+	month = {09},
+	date = {2008-09},
+	journal = {IEEE Transactions on Systems, Man, and Cybernetics, Part C (Applications and Reviews)},
+	pages = {649--659},
+	volume = {38},
+	number = {5},
+	doi = {10.1109/TSMCC.2008.923876},
+	url = {https://ieeexplore.ieee.org/document/4603103}
+}
+
+@article{peerbhay2015,
+	title = {Random Forests Unsupervised Classification: The Detection and Mapping of Solanum mauritianum Infestations in Plantation Forestry Using Hyperspectral Data},
+	author = {Peerbhay, Kabir Yunus and Mutanga, Onisimo and Ismail, Riyad},
+	year = {2015},
+	month = {06},
+	date = {2015-06},
+	journal = {IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing},
+	pages = {3107--3122},
+	volume = {8},
+	number = {6},
+	doi = {10.1109/JSTARS.2015.2396577},
+	url = {https://ieeexplore.ieee.org/document/7039573},
+	note = {TLDR: Overall, this research has demonstrated the potential of utilizing an unsupervised and accurate RF framework for the detection and mapping of alien invasive plants.}
+}
+
+@article{wu2007,
+	title = {Statistical analysis and optimization of parametric delay test},
+	author = {Wu, Sean H. and Lee, Benjamin N. and Wang, Li-C. and Abadir, Magdy S.},
+	year = {2007},
+	month = {10},
+	date = {2007-10},
+	journal = {2007 IEEE International Test Conference},
+	pages = {1--10},
+	doi = {10.1109/TEST.2007.4437626},
+	url = {https://ieeexplore.ieee.org/document/4437626},
+	note = {ISSN: 2378-2250}
+}
+
+@article{omar2022,
+	title = {Duplicate Detection Using Unsupervised Random Forests: A Preliminary Analysis},
+	author = {Omar, Zaturrawiah Ali and Abu Bakar, Mohd Aftar and Zamzuri, Zamira Hasanah and Ariff, Noratiqah Mohd},
+	year = {2022},
+	month = {09},
+	date = {2022-09},
+	journal = {2022 3rd International Conference on Artificial Intelligence and Data Sciences (AiDAS)},
+	pages = {66--71},
+	doi = {10.1109/AiDAS56890.2022.9918724},
+	url = {https://ieeexplore.ieee.org/document/9918724},
+	note = {TLDR: The performance of the employed encoding methods was equal when applied to the dataset and, together with binning, those conditions were able to detect more perfect matches, and the optimal threshold was determined using the maximum F -measure.}
+}
+
+@article{peerbhay2016,
+	title = {Unsupervised anomaly weed detection in riparian forest areas using hyperspectral data and LiDAR},
+	author = {Peerbhay, Kabir and Mutanga, Onisimo and Lottering, Romano and Ismail, Riyad},
+	year = {2016},
+	month = {08},
+	date = {2016-08},
+	journal = {2016 8th Workshop on Hyperspectral Image and Signal Processing: Evolution in Remote Sensing (WHISPERS)},
+	pages = {1--5},
+	doi = {10.1109/WHISPERS.2016.8071797},
+	url = {https://ieeexplore.ieee.org/document/8071797},
+	note = {ISSN: 2158-6276
+TLDR: Overall, this research has shown the potential of combining hyperspectral information with LiDAR derived height to precisely map the occurrence of riparian bugweed using an automated unsupervised RF anomaly detection framework.}
+}
+
+@article{lee2012,
+	title = {Multivariate Spatial Cluster Analysis Using Mahalanobis Distance},
+	author = {Lee, Monghyeon},
+	year = {2012},
+	date = {2012},
+	journal = {Journal of the Korean Cartographic Association},
+	pages = {37--46},
+	volume = {12},
+	number = {2},
+	langid = {en}
+}
+
+@article{kruber2019,
+	title = {Unsupervised and Supervised Learning with the Random Forest Algorithm for Traffic Scenario Clustering and Classification},
+	author = {Kruber, Friedrich and Wurst, Jonas and Morales, {Eduardo Sánchez} and Chakraborty, Samarjit and Botsch, Michael},
+	year = {2019},
+	month = {06},
+	date = {2019-06},
+	journal = {2019 IEEE Intelligent Vehicles Symposium (IV)},
+	pages = {2463--2470},
+	doi = {10.1109/IVS.2019.8813994},
+	url = {https://ieeexplore.ieee.org/document/8813994},
+	note = {ISSN: 2642-7214
+TLDR: The results show that the proposed method is an excellent approach to automatically categorize traffic scenarios, which is particularly relevant for testing autonomous vehicle functionality.}
+}
+
+@article{kruber2019,
+	title = {Unsupervised and Supervised Learning with the Random Forest Algorithm for Traffic Scenario Clustering and Classification},
+	author = {Kruber, Friedrich and Wurst, Jonas and Morales, {Eduardo Sánchez} and Chakraborty, Samarjit and Botsch, Michael},
+	year = {2019},
+	month = {06},
+	date = {2019-06},
+	journal = {2019 IEEE Intelligent Vehicles Symposium (IV)},
+	pages = {2463--2470},
+	doi = {10.1109/IVS.2019.8813994},
+	url = {https://ieeexplore.ieee.org/document/8813994},
+	note = {ISSN: 2642-7214
+TLDR: The results show that the proposed method is an excellent approach to automatically categorize traffic scenarios, which is particularly relevant for testing autonomous vehicle functionality.}
+}
